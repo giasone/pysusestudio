@@ -562,8 +562,8 @@ class pySuseStudio:
 	def addOverlayFiles(self, id, body, filename=None, path=None, owner=None, group=None, permissions=None, enabled=None):
 		"""addOverlayFiles(id, body, filename=None, path=None, owner=None, group=None, permissions=None, enabled=None)
 
-            Adds a ﬁle to the given id appliance. 
-            Optionally, one or more metadata settings can be speciﬁed. If those are left out, they 
+            Adds a file to the given id appliance. 
+            Optionally, one or more metadata settings can be specified. If those are left out, they 
             can also be change later. 
             
             Parameters:
@@ -1012,9 +1012,9 @@ class pySuseStudio:
 	def getRepositories(self, base=None, filter=None):
 		"""getRepositories(base=None, filter=None)
 
-        Returns a list of repositories. If neither base system nor filter are speciﬁed all available repositories 
+        Returns a list of repositories. If neither base system nor filter are specified all available repositories 
         are returned. 
-        When ﬁltering the results with the filter parameter, the repository name, repository url and repository 
+        When filtering the results with the filter parameter, the repository name, repository url and repository 
         packages are searched.
         
             Parameters:
