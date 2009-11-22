@@ -3,8 +3,8 @@ from pysusestudio import pysusestudio
 
 if __name__ == "__main__":
 
-    username = 'giasone'
-    password = 'fLCOFLOfdB2L' 
+    username = 'username'
+    password = 'password' 
     
 	# Instantiate with Basic (HTTP) Authentication
     SS = pysusestudio.pySuseStudio(username, password)
