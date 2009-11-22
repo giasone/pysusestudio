@@ -1,0 +1,54 @@
+                                                                                                                          
+             __                __ _             _ _       
+ _ __  _   _/ _\_   _ ___  ___/ _\ |_ _   _  __| (_) ___  
+| '_ \| | | \ \| | | / __|/ _ \ \| __| | | |/ _` | |/ _ \ 
+| |_) | |_| |\ \ |_| \__ \  __/\ \ |_| |_| | (_| | | (_) |
+| .__/ \__, \__/\__,_|___/\___\__/\__|\__,_|\__,_|_|\___/ 
+|_|    |___/                                              
+
+A SUSE Studio library for Python!
+
+Features:
+  Up-to-date with Suse Studio api.
+  Actively under development.
+  Supports all of the Suse Studio api endpoints.
+  
+
+Getting started:
+  This is a Python library that works with the Suse Studio API. This libraries uses XML-RPC, that’s not necessarily good but I just thought it fit better in to Python since XML-RPC is part of the standard python library. The format that the API functions return is a nested dictionary, it might change later to something more palatable. Other features include a streamlined authentication process and an integrated upload method. Anyway, this whole library came to be because I am working on a Suse Studio client that I will be releasing shortly i think. Here is how it works:
+
+username = 'myusername'
+password = 'mypassword' 
+    
+# Instantiate with Basic (HTTP) Authentication
+objSS = pySuseStudio(username, password)
+
+# This returns the Account information
+account = objSS.getAccount()
+print account
+
+
+Installing:  
+  You may use easy_install to quickly get pysusestudio installed on your system:
+      easy_install pysusestudio  (run as root)
+  You may also clone/download the source code and then execute:
+      python setup.py install (run as root)
+  If you wish you may also bundle the pySuseStudio package with your application.
+
+Souce code:
+  Google Code: <http://code.google.com/p/pysusestudio/> (questions/feature request/bug reports/anything else)
+
+TODO:
+  Python 3 support.
+  Streaming API support.
+  Cache system (memory, file, memcache client)
+
+Author: Gianluca Urgese <g.urgese@jasone.it>
+License: GPL v.2 http://www.gnu.org/licenses/gpl.txt
+Dependencies:
+  Python 2.5+
+  Simplejson <http://undefined.org/python/#simplejson>
+  HTTPLib2 <http://code.google.com/p/httplib2/>
+    
+
+
