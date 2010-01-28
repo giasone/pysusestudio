@@ -27,7 +27,7 @@
 
 __license__ = 'GPL v.2 http://www.gnu.org/licenses/gpl.txt'
 __author__ = "Gianluca Urgese <g.urgese@jasone.it>"
-__version__ = '0.3'
+__version__ = '0.4'
 
 import httplib, urllib, urllib2, mimetypes, mimetools, httplib2
 
@@ -70,7 +70,7 @@ class AuthError(pySuseStudioError):
 		return repr(self.msg)
 
 class pySuseStudio:
-	def __init__(self, username = None, password = None, headers = None):
+	def __init__(self, username = None, password = None, headers = None, address = 'http://susestudio.com/api/v1'):
 		"""pySuseStudio( username = None, password = None, headers = None)
 
 			Instantiates an instance of pySuseStudio. Takes optional parameters for authentication and such (see below).
@@ -83,12 +83,17 @@ class pySuseStudio:
 		self.authenticated = False
 		self.username = username
 		self.password = password
-		self.address = 'http://susestudio.com/api/v1'
+		self.address = address
+
+		# get address for authentication
+		auth_addr = urlparse(self.address)
+		self.auth_address = str(auth_addr.scheme) +'://'+ str(auth_addr.netloc)
+
 		# Check and set up authentication
 		if self.username is not None and password is not None:
 			# Assume Basic authentication ritual
 			self.auth_manager = urllib2.HTTPPasswordMgrWithDefaultRealm()
-			self.auth_manager.add_password(None, "http://susestudio.com", self.username, password)
+			self.auth_manager.add_password(None, self.auth_address, self.username, password)
 			self.handler = urllib2.HTTPBasicAuthHandler(self.auth_manager)
 			self.opener = urllib2.build_opener(self.handler)
 			if headers is not None:
@@ -123,7 +128,7 @@ class pySuseStudio:
 
 			Returns an HTML page which contains the API key flagged as:
 
-            <span class="studio:api_key">ksdjfu93r</span>. 
+			<span class="studio:api_key">ksdjfu93r</span>. 
             
 		"""
 		try:
@@ -134,17 +139,17 @@ class pySuseStudio:
 		except HTTPError, e:
 			raise pySuseStudioError("getApiKey() failed with a %s error code." % `e.code`)
 
-    # Template sets
+	# Template sets
 	def getTemplateSets(self, name = None):
 		"""getTemplateSets(name = None)
 
 			List all template sets.
-            Template sets are used to group available templates by topic. The 'default'
-            template set contains all vanilla SUSE templates, 'mono' contains those that
-            are optimized to be used for mono applications, for example. 
+			Template sets are used to group available templates by topic. The 'default'
+			template set contains all vanilla SUSE templates, 'mono' contains those that
+			are optimized to be used for mono applications, for example. 
             
-            Parameters:
-                name - Optional. Name of template
+			Parameters:
+			    name - Optional. Name of template
 
 		"""
 		try:
@@ -159,7 +164,7 @@ class pySuseStudio:
 		except HTTPError, e:
 			raise pySuseStudioError("getTemplateSets() failed with a %s error code." % `e.code`)
 			
-    # Appliances
+	# Appliances
 	def getAppliances(self, id = None, status = False):
 		"""getAppliances(id = None, status = False)
 
@@ -405,6 +410,7 @@ class pySuseStudio:
 		except HTTPError, e:
 			raise pySuseStudioError("getSoftwareInstalled() failed with a %s error code." % `e.code`)
 			
+
 	def addSoftwarePackage(self, id, name, version=None, repository_id=None):
 		"""addSoftwarePackage(id, name, version=None, repository_id=None)
 
@@ -504,7 +510,55 @@ class pySuseStudio:
 		except HTTPError, e:
 			raise pySuseStudioError("delSoftwarePattern() failed with a %s error code." % `e.code`)
 			
+
 			
+	def banSoftwarePackage(self, id, name):
+		"""banSoftwarePackage(id, name)
+
+            Ban specified package from the given appliance
+            
+            Parameters:
+                id - Id of the appliance
+                name - Name of the package
+
+		"""
+		try:
+			if self.authenticated is True:
+				url = self.address+'/user/appliances/'+str(id)+'/cmd/ban_package'
+				data = "name="+str(name)
+
+				return self.opener.open(url, data).read()
+			else:
+				raise pySuseStudioError("You need to be authenticated to ban package from appliance.")
+		except HTTPError, e:
+			raise pySuseStudioError("banSoftwarePackage() failed with a %s error code." % `e.code`)
+			
+			
+	def unbanSoftwarePackage(self, id, name):
+		"""unbanSoftwarePackage(id, name)
+
+            Unban specified package from the given appliance
+            
+            Parameters:
+                id - Id of the appliance
+                name - Name of the package
+
+		"""
+		try:
+			if self.authenticated is True:
+				url = self.address+'/user/appliances/'+str(id)+'/cmd/unban_package'
+				data = "name="+str(name)
+
+				return self.opener.open(url, data).read()
+			else:
+				raise pySuseStudioError("You need to be authenticated to unban package from appliance.")
+		except HTTPError, e:
+			raise pySuseStudioError("unbanSoftwarePackage() failed with a %s error code." % `e.code`)
+			
+			
+			
+
+
 	def searchSoftware(self, id, q, all_fields='false', all_repos='false'):
 		"""searchSoftware(id, q, all_fields='false', all_repos='false')
 
@@ -538,6 +592,123 @@ class pySuseStudio:
 		except HTTPError, e:
 			raise pySuseStudioError("searchSoftware() failed with a %s error code." % `e.code`)
 		
+
+	# Image files
+	def getImageFiles(self, id, build_id, path):
+		"""getImageFiles(id, build_id, path)
+
+			Returns the file with the given path from an image.   
+            
+            Parameters:
+                id - Id of the appliance
+                build_id - Id of the build.
+		path - Path to the file in the built appliance
+		"""
+		try:
+			if self.authenticated is True:
+				url = self.address+'/user/appliances/'+str(id)+'/image_files?build_id='+str(build_id)+'&path='+str(path)
+				return self.opener.open(url).read()
+			else:
+				raise pySuseStudioError("You need to be authenticated to get files from an image.")
+		except HTTPError, e:
+			raise pySuseStudioError("getImageFiles() failed with a %s error code." % `e.code`)
+			
+			
+	# GPG Keys
+	def getGPGKeys(self, id):
+		"""getGPGKeys(id)
+
+			List all the GPG keys for the given id appliance.  
+            
+            Parameters:
+                id - Id of the appliance
+
+		"""
+		try:
+			if self.authenticated is True:
+				url = self.address+'/user/appliances/'+str(id)+'/gpg_keys'
+				
+				return self.opener.open(url).read()
+			else:
+				raise pySuseStudioError("You need to be authenticated to get GPG keys from an appliance.")
+		except HTTPError, e:
+			raise pySuseStudioError("getGPGKeys() failed with a %s error code." % `e.code`)
+
+
+	def getGPGKey(self, id, key_id):
+		"""getGPGKey(id, key_id)
+
+			Shows information on the GPG key with the id key_id.  
+            
+            Parameters:
+                id - Id of the appliance
+		key_id - Id of the GPG key
+
+		"""
+		try:
+			if self.authenticated is True:
+				url = self.address+'/user/appliances/'+str(id)+'/gpg_keys/'+str(key_id)
+				
+				return self.opener.open(url).read()
+			else:
+				raise pySuseStudioError("You need to be authenticated to get info from a GPG key.")
+		except HTTPError, e:
+			raise pySuseStudioError("getGPGKey() failed with a %s error code." % `e.code`)
+
+			
+	def setGPGKey(self, id, name, target, key = None):
+		"""setGPGKey(id, name, target, key)
+
+            Uploads a GPG key to the appliance with the given id. The key can either be given as the key parameter 
+	    or wrapped as with form-based file uploads in HTML (RFC 1867) in the body of the POST request. 
+	    The key will be imported into the keyring that is specified in the target parameter
+            
+            Parameters:
+                id - Id of the appliance
+                name - A name for the key
+		target - The target specifies in which keyring the key will be imported. Possible values are: 'rpm'
+		key (optional) - The URL encoded key
+
+		"""
+		try:
+			if self.authenticated is True:
+				url = self.address+'/user/appliances/'+str(id)+'/gpg_keys'
+				data = "?name="+str(name)
+				data = data + "&target="+str(target)
+				if key is not None:
+				    data = data + '&key=' + str(key)
+
+				return self.opener.open(url, data).read()
+			else:
+				raise pySuseStudioError("You need to be authenticated to set a GPG Key for an appliance.")
+		except HTTPError, e:
+			raise pySuseStudioError("setGPGKey() failed with a %s error code." % `e.code`)
+			
+	
+	def delGPGKey(self, id, key_id):
+		"""delGPGKey(self, id, key_id)
+
+			Deletes the GPG key with the id key_id from the appliance. 
+            
+            Parameters:
+                id - Id of the appliance
+		key_id - Id of the GPG key
+
+		"""
+		try:
+			if self.authenticated is True:
+				url = self.address+'/user/appliances/'+str(id)+'/gpg_keys/'+str(key_id)
+				client = httplib2.Http(".cache") 
+				client.add_credentials(self.username, self.password)  
+				response, xml = client.request(url, 'DELETE')
+				return xml
+			else:
+				raise pySuseStudioError("You need to be authenticated to delete a GPG key.")
+		except HTTPError, e:
+			raise pySuseStudioError("delGPGKey() failed with a %s error code." % `e.code`)
+			
+			
+
         # Overlay files
 	def getOverlayFiles(self, id):
 		"""getOverlayFiles(id)
