@@ -6,7 +6,7 @@ import sys, os
 
 __license__ = 'GPL v.2 http://www.gnu.org/licenses/gpl.txt'
 __author__ = "Gianluca Urgese <g.urgese@jasone.it>"
-__version__ = '0.3'
+__version__ = '0.4'
 
 # Distutils version
 METADATA = dict(

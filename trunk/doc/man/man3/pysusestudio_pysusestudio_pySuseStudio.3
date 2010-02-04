@@ -1,0 +1,871 @@
+.TH "pysusestudio::pysusestudio::pySuseStudio" 3 "4 Feb 2010" "Version 0.4" "PySuseStudio" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+pysusestudio::pysusestudio::pySuseStudio \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBbuildApiURL\fP"
+.br
+.ti -1c
+.RI "def \fBgetAccount\fP"
+.br
+.ti -1c
+.RI "def \fBgetApiKey\fP"
+.br
+.ti -1c
+.RI "def \fBgetTemplateSets\fP"
+.br
+.ti -1c
+.RI "def \fBgetAppliances\fP"
+.br
+.ti -1c
+.RI "def \fBsetAppliances\fP"
+.br
+.ti -1c
+.RI "def \fBdelAppliances\fP"
+.br
+.ti -1c
+.RI "def \fBgetRepositories\fP"
+.br
+.ti -1c
+.RI "def \fBputRepositories\fP"
+.br
+.ti -1c
+.RI "def \fBsetRepositories\fP"
+.br
+.ti -1c
+.RI "def \fBdelRepositories\fP"
+.br
+.ti -1c
+.RI "def \fBaddRepositoryUser\fP"
+.br
+.ti -1c
+.RI "def \fBgetSoftware\fP"
+.br
+.ti -1c
+.RI "def \fBputSoftware\fP"
+.br
+.ti -1c
+.RI "def \fBgetSoftwareInstalled\fP"
+.br
+.ti -1c
+.RI "def \fBaddSoftwarePackage\fP"
+.br
+.ti -1c
+.RI "def \fBdelSoftwarePackage\fP"
+.br
+.ti -1c
+.RI "def \fBaddSoftwarePattern\fP"
+.br
+.ti -1c
+.RI "def \fBdelSoftwarePattern\fP"
+.br
+.ti -1c
+.RI "def \fBbanSoftwarePackage\fP"
+.br
+.ti -1c
+.RI "def \fBunbanSoftwarePackage\fP"
+.br
+.ti -1c
+.RI "def \fBsearchSoftware\fP"
+.br
+.ti -1c
+.RI "def \fBgetImageFiles\fP"
+.br
+.ti -1c
+.RI "def \fBgetGPGKeys\fP"
+.br
+.ti -1c
+.RI "def \fBgetGPGKey\fP"
+.br
+.ti -1c
+.RI "def \fBsetGPGKey\fP"
+.br
+.ti -1c
+.RI "def \fBdelGPGKey\fP"
+.br
+.ti -1c
+.RI "def \fBgetOverlayFiles\fP"
+.br
+.ti -1c
+.RI "def \fBaddOverlayFiles\fP"
+.br
+.ti -1c
+.RI "def \fBgetOverlayFile\fP"
+.br
+.ti -1c
+.RI "def \fBgetOverlayFileMeta\fP"
+.br
+.ti -1c
+.RI "def \fBputOverlayFile\fP"
+.br
+.ti -1c
+.RI "def \fBputOverlayFileMeta\fP"
+.br
+.ti -1c
+.RI "def \fBdelOverlayFile\fP"
+.br
+.ti -1c
+.RI "def \fBgetRunningBuilds\fP"
+.br
+.ti -1c
+.RI "def \fBgetRunningBuild\fP"
+.br
+.ti -1c
+.RI "def \fBaddBuild\fP"
+.br
+.ti -1c
+.RI "def \fBdelRunningBuild\fP"
+.br
+.ti -1c
+.RI "def \fBgetCompletedBuilds\fP"
+.br
+.ti -1c
+.RI "def \fBgetCompletedBuild\fP"
+.br
+.ti -1c
+.RI "def \fBdelCompletedBuild\fP"
+.br
+.ti -1c
+.RI "def \fBgetRPMs\fP"
+.br
+.ti -1c
+.RI "def \fBgetRPMInfo\fP"
+.br
+.ti -1c
+.RI "def \fBgetRPM\fP"
+.br
+.ti -1c
+.RI "def \fBaddRPM\fP"
+.br
+.ti -1c
+.RI "def \fBputRPM\fP"
+.br
+.ti -1c
+.RI "def \fBdelRPM\fP"
+.br
+.ti -1c
+.RI "def \fBgetRepositories\fP"
+.br
+.ti -1c
+.RI "def \fBgetRepository\fP"
+.br
+.ti -1c
+.RI "def \fBaddRepository\fP"
+.br
+.ti -1c
+.RI "def \fBversion\fP"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBauthenticated\fP"
+.br
+.ti -1c
+.RI "\fBusername\fP"
+.br
+.ti -1c
+.RI "\fBpassword\fP"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "tuple \fBauth_addr\fP = urlparse(self.address)"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::__init__ ( self,  username = \fCNone\fP,  password = \fCNone\fP,  headers = \fCNone\fP,  host = \fC'http://susestudio.com'\fP)".PP
+.nf
+pySuseStudio( username = None, password = None, headers = None)
+
+        Instantiates an instance of pySuseStudio. Takes optional parameters for authentication and such (see below).
+
+        Parameters:
+username - Your Suse Studio username, if you want Basic (HTTP) Authentication.
+password - Your Suse Studio secret key, if you want Basic (HTTP) Authentication.
+headers - User agent header.
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::addBuild ( self,  id,  force = \fCNone\fP,  version = \fCNone\fP,  image_type = \fCNone\fP)".PP
+.nf
+addBuild(id, force=None, version=None, image_type=None)
+
+            Start a new build for the given id appliance. 
+            If there already is a build with the same appliance settings (build type and version) 
+            an error is returned. In this case a build can be enforced by setting the optional 
+            force parameter to true.
+            Optionally the appliance version and build type can be set with the version and image_type parameters. 
+            
+            Parameters:
+id - Id of the appliance
+force (optional) - Force a build even if it overwrites an already existing build. 
+version (optional) - The version of the appliance. 
+image_type (optional) -  The format of the build. Supported are 'xen','oem','vmx' and 'iso'. 
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::addOverlayFiles ( self,  id,  body,  filename = \fCNone\fP,  path = \fCNone\fP,  owner = \fCNone\fP,  group = \fCNone\fP,  permissions = \fCNone\fP,  enabled = \fCNone\fP)".PP
+.nf
+addOverlayFiles(id, body, filename=None, path=None, owner=None, group=None, permissions=None, enabled=None)
+
+            Adds a file to the given id appliance. 
+            Optionally, one or more metadata settings can be specified. If those are left out, they 
+            can also be change later. 
+            
+            Parameters:
+id - Id of the appliance
+body - the entity body to be sent with the request.
+filename (optional) - The name of the file in the filesystem. 
+path (optional) - The path where the file will be stored. 
+owner (optional) - The owner of the file. 
+group (optional) - The group of the file. 
+permissions (optional) - The permissions of the file. 
+enabled (optional) - Used to enable/disable this file for the builds. 
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::addRepository ( self,  repo_url,  name)".PP
+.nf
+addRepository(repo_url, name)
+
+            Imports a new repository into Studio. Returns the metadata for the created repository
+            
+            Parameters:
+repo_url - Base url of the repository. 
+name - Name for the repository. 
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::addRepositoryUser ( self,  id)".PP
+.nf
+addRepositoryUser(id)
+
+            Adds the according user repository (the one containing the uploaded RPMs) to the appliance
+            
+            Parameters:
+id - Id of the appliance
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::addRPM ( self,  base)".PP
+.nf
+addBuild(base)
+
+            Adds an RPM or archive to the user repository for appliances base 
+            
+            Parameters:
+base - Base system of the RPM or archive, e.g. 11.1 or SLED11.
+
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::addSoftwarePackage ( self,  id,  name,  version = \fCNone\fP,  repository_id = \fCNone\fP)".PP
+.nf
+addSoftwarePackage(id, name, version=None, repository_id=None)
+
+            Add specified package to the given appliance
+            
+            Parameters:
+id - Id of the appliance
+name - Name of the package
+version (optional) - Version of the package
+repository_id (optional) - Repository to pick the package from
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::addSoftwarePattern ( self,  id,  name,  version = \fCNone\fP,  repository_id = \fCNone\fP)".PP
+.nf
+addSoftwarePattern(id, name, version=None, repository_id=None)
+
+            Add specified pattern to the given appliance
+            
+            Parameters:
+id - Id of the appliance
+name - Name of the pattern
+version (optional) - Version of the pattern
+repository_id (optional) - Repository to pick the pattern from
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::banSoftwarePackage ( self,  id,  name)".PP
+.nf
+banSoftwarePackage(id, name)
+
+            Ban specified package from the given appliance
+            
+            Parameters:
+id - Id of the appliance
+name - Name of the package
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::buildApiURL ( self,  base_url,  params)"
+.SS "def pysusestudio::pysusestudio::pySuseStudio::delAppliances ( self,  id)".PP
+.nf
+delAppliances(self, id)
+
+        Delete appliance with given id. 
+            
+            Parameters:
+id - Id of the appliance
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::delCompletedBuild ( self,  id)".PP
+.nf
+delCompletedBuild(id)
+
+            Delete specified completed build
+            
+            Parameters:
+id - Id of the running build
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::delGPGKey ( self,  id,  key_id)".PP
+.nf
+delGPGKey(self, id, key_id)
+
+        Deletes the GPG key with the id key_id from the appliance. 
+            
+            Parameters:
+id - Id of the appliance
+key_id - Id of the GPG key
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::delOverlayFile ( self,  id)".PP
+.nf
+delOverlayFile(id)
+
+            Delete specified overlay file
+            
+            Parameters:
+id - Id of the file
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::delRepositories ( self,  id,  repo_id)".PP
+.nf
+delRepositories(id, repo_id)
+
+            Remove the specified repository to the given id appliance
+            
+            Parameters:
+id - Id of the appliance
+repo_id - Id of the repository
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::delRPM ( self,  id)".PP
+.nf
+delRPM(id)
+
+            Deletes the RPM or archive with the given id from the user repository
+            
+            Parameters:
+id - id of the uploaded RPM.
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::delRunningBuild ( self,  id)".PP
+.nf
+delRunningBuild(id)
+
+            Delete specified running build
+            
+            Parameters:
+id - Id of the running build
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::delSoftwarePackage ( self,  id,  name)".PP
+.nf
+delSoftwarePackage(id, name)
+
+            Delete specified package from the given appliance
+            
+            Parameters:
+id - Id of the appliance
+name - Name of the package
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::delSoftwarePattern ( self,  id,  name)".PP
+.nf
+delSoftwarePattern(id, name)
+
+            Delete specified pattern from the given appliance
+            
+            Parameters:
+id - Id of the appliance
+name - Name of the pattern
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getAccount ( self)".PP
+.nf
+getAccount()
+
+        Returns information about the account, such as username, email address and disk quota.
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getApiKey ( self)".PP
+.nf
+getApiKey()
+
+        Returns an HTML page which contains the API key flagged as:
+
+        <span class="studio:api_key">ksdjfu93r</span>. 
+            
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getAppliances ( self,  id = \fCNone\fP,  status = \fCFalse\fP)".PP
+.nf
+getAppliances(id = None, status = False)
+
+        List all appliances of the current user.  
+            
+            Parameters:
+id - Optional. Id of the appliance
+status - Optional. If true get status of given Id appliance
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getCompletedBuild ( self,  id)".PP
+.nf
+getCompletedBuild(id)
+
+       Show build info of the build with the given id .
+        
+            Parameters:
+id - Id of the build
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getCompletedBuilds ( self,  id)".PP
+.nf
+getCompletedBuilds(id)
+
+        List all completed builds for the appliance with the given id .
+        
+            Parameters:
+id - Id of the appliance
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getGPGKey ( self,  id,  key_id)".PP
+.nf
+getGPGKey(id, key_id)
+
+        Shows information on the GPG key with the id key_id.  
+            
+            Parameters:
+id - Id of the appliance
+key_id - Id of the GPG key
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getGPGKeys ( self,  id)".PP
+.nf
+getGPGKeys(id)
+
+        List all the GPG keys for the given id appliance.  
+            
+            Parameters:
+id - Id of the appliance
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getImageFiles ( self,  id,  build_id,  path)".PP
+.nf
+getImageFiles(id, build_id, path)
+
+        Returns the file with the given path from an image.   
+            
+            Parameters:
+id - Id of the appliance
+build_id - Id of the build.
+path - Path to the file in the built appliance
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getOverlayFile ( self,  id)".PP
+.nf
+getOverlayFile(id)
+
+        Return overlay file with the given id .
+        
+            Parameters:
+id - Id of the file
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getOverlayFileMeta ( self,  id)".PP
+.nf
+getOverlayFileMeta(id)
+
+        Return overlay file meta data with the given id .
+        
+            Parameters:
+id - Id of the file
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getOverlayFiles ( self,  id)".PP
+.nf
+getOverlayFiles(id)
+
+        List all overlay files of the given id appliance.
+        
+            Parameters:
+id - Id of the appliance
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getRepositories ( self,  base = \fCNone\fP,  filter = \fCNone\fP)".PP
+.nf
+getRepositories(base=None, filter=None)
+
+        Returns a list of repositories. If neither base system nor filter are specified all available repositories 
+        are returned. 
+        When filtering the results with the filter parameter, the repository name, repository url and repository 
+        packages are searched.
+        
+            Parameters:
+base (optional) - Limit the results to repositories with this base system. 
+filter (optional) - Only show repositories matching this search string.
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getRepositories ( self,  id)".PP
+.nf
+getRepositories(id)
+
+        List all repositories for the given id appliance.  
+            
+            Parameters:
+id - Id of the appliance
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getRepository ( self,  id)".PP
+.nf
+getCompletedBuild(id)
+
+       Show information on the repository with the given id .
+        
+            Parameters:
+id - Id of the repository.
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getRPM ( self,  id)".PP
+.nf
+getRPM(id)
+
+       Returns the RPM with the given id .
+        
+            Parameters:
+id - Id of the uploaded RPM
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getRPMInfo ( self,  id)".PP
+.nf
+getRPMInfo(id)
+
+       Show information on the uploaded RPM with the given id .
+        
+            Parameters:
+id - Id of the uploaded RPM
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getRPMs ( self,  base)".PP
+.nf
+getRPMs(base)
+
+        List all uploaded RPMs for the the given base system.
+        
+            Parameters:
+base - Base system of the RPM or archive, e.g. 11.1 or SLED11.
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getRunningBuild ( self,  id)".PP
+.nf
+getRunningBuild(id)
+
+       Show status of the build with the given id .
+        
+            Parameters:
+id - Id of the build
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getRunningBuilds ( self,  id)".PP
+.nf
+getRunningBuilds(id)
+
+        List all running builds for the appliance with the given id .
+        
+            Parameters:
+id - Id of the appliance
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getSoftware ( self,  id)".PP
+.nf
+getSoftware(id)
+
+        List all the software for the given id appliance.  
+            
+            Parameters:
+id - Id of the appliance
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getSoftwareInstalled ( self,  id,  build_id = \fCNone\fP)".PP
+.nf
+getSoftwareInstalled(id, build_id)
+
+        List all packages and patterns that are installed. You can either specify the 
+        appliance with the id parameter, which will list the software 
+        that will installed with the next build or via an build id. That makes it possible 
+        to retrieve the installed software for older builds.   
+            
+            Parameters:
+id - Id of the appliance
+build_id (optional) - Id of the build.
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::getTemplateSets ( self,  name = \fCNone\fP)".PP
+.nf
+getTemplateSets(name = None)
+
+        List all template sets.
+        Template sets are used to group available templates by topic. The 'default'
+        template set contains all vanilla SUSE templates, 'mono' contains those that
+        are optimized to be used for mono applications, for example. 
+            
+        Parameters:
+            name - Optional. Name of template
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::putOverlayFile ( self,  id,  body)".PP
+.nf
+putSoftware(id, body)
+
+        Writes the content of the file with given id.  
+            
+            Parameters:
+id - Id of the file
+body - the entity body to be sent with the request
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::putOverlayFileMeta ( self,  id,  body)".PP
+.nf
+putSoftware(id, body)
+
+        Writes the content of the file metadata with given id.  
+            
+            Parameters:
+id - Id of the file
+body - the entity body to be sent with the request
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::putRepositories ( self,  id)".PP
+.nf
+putRepositories(id)
+
+        Update the list of repositories of the given id appliance.  
+            
+            Parameters:
+id - Id of the appliance
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::putRPM ( self,  id,  body)".PP
+.nf
+putSoftware(id, body)
+
+        Update the content of the RPM or archive with the given id.  
+            
+            Parameters:
+id - Id of the uploaded RPM. 
+body - the entity body to be sent with the request.
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::putSoftware ( self,  id)".PP
+.nf
+putSoftware(id)
+
+        Update the list of repositories of the given id appliance.  
+            
+            Parameters:
+id - Id of the appliance
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::searchSoftware ( self,  id,  q,  all_fields = \fC'false'\fP,  all_repos = \fC'false'\fP)".PP
+.nf
+searchSoftware(id, q, all_fields='false', all_repos='false')
+
+            Search all software that matches the given search string. If the all_fields
+            parameter is set to true all fields are considered, otherwise only the name of the package 
+            or pattern is matched against the search_string. 
+            By default only software that is available to the appliance is considered, e.g. the search is limited to the 
+            repositories of this appliances. If you want to search in all repositories set the all_repos parameter to 
+            true
+            
+            Parameters:
+id - Id of the appliance
+q - The search string 
+all_fields (optional) - Option to perform the search on all fields. Default is 'false'
+all_repos (optional) - Option to perform the search on all repositories. Default is 'false'
+
+        
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::setAppliances ( self,  clone_from,  name = \fCNone\fP,  arch = \fCNone\fP)".PP
+.nf
+setAppliances(clone_from, name, arch)
+
+        Create a new appliance by cloning a template or another appliance with the id appliance_id. 
+            If name is left out, a name will be generated. If arch is left out a i686 appliance will be created.  
+            POST /api/v1/user/appliances?clone_from=<appliance_id>&name=<name>&arch=<arch>
+            Parameters:
+clone_from - The template the new appliance should be based on. 
+name (optional) - The name of appliance 
+arch (optional) - The architecture of the appliance (x86_64 or i686) 
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::setGPGKey ( self,  id,  name,  target,  key = \fCNone\fP)".PP
+.nf
+setGPGKey(id, name, target, key)
+
+            Uploads a GPG key to the appliance with the given id. The key can either be given as the key parameter 
+	    or wrapped as with form-based file uploads in HTML (RFC 1867) in the body of the POST request. 
+	    The key will be imported into the keyring that is specified in the target parameter
+            
+            Parameters:
+id - Id of the appliance
+name - A name for the key
+target - The target specifies in which keyring the key will be imported. Possible values are: 'rpm'
+key (optional) - The URL encoded key
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::setRepositories ( self,  id,  repo_id)".PP
+.nf
+setRepositories(id, repo_id)
+
+            Add the specified repository to the given id appliance
+            
+            Parameters:
+id - Id of the appliance
+repo_id - Id of the repository
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::unbanSoftwarePackage ( self,  id,  name)".PP
+.nf
+unbanSoftwarePackage(id, name)
+
+            Unban specified package from the given appliance
+            
+            Parameters:
+id - Id of the appliance
+name - Name of the package
+
+.fi
+.PP
+ 
+.SS "def pysusestudio::pysusestudio::pySuseStudio::version ( self)".PP
+.nf
+version()
+
+            Print version information
+
+.fi
+.PP
+ 
+.SH "Member Data Documentation"
+.PP 
+.SS "tuple \fBpysusestudio::pysusestudio::pySuseStudio::auth_addr\fP = urlparse(self.address)\fC [static]\fP"
+.SS "\fBpysusestudio::pysusestudio::pySuseStudio::authenticated\fP"
+.SS "\fBpysusestudio::pysusestudio::pySuseStudio::password\fP"
+.SS "\fBpysusestudio::pysusestudio::pySuseStudio::username\fP"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PySuseStudio from the source code.

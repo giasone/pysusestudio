@@ -1,6 +1,6 @@
-Metadata-Version: 0.3
+Metadata-Version: 0.4
 Name: pysusestudio
-Version: 0.3
+Version: 0.4
 Summary:  pySuseStudio is complete and easy to use Python REST module to interact with Suse Studio web platform. 
 Home-page: http://code.google.com/p/pysusestudio/
 Author: Gianluca Urgese
