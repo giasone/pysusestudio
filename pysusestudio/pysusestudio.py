@@ -70,7 +70,7 @@ class AuthError(pySuseStudioError):
 		return repr(self.msg)
 
 class pySuseStudio:
-	def __init__(self, username = None, password = None, headers = None, address = 'http://susestudio.com/api/v1'):
+	def __init__(self, username = None, password = None, headers = None, host = 'http://susestudio.com'):
 		"""pySuseStudio( username = None, password = None, headers = None)
 
 			Instantiates an instance of pySuseStudio. Takes optional parameters for authentication and such (see below).
@@ -83,14 +83,17 @@ class pySuseStudio:
 		self.authenticated = False
 		self.username = username
 		self.password = password
-		self.address = address
-
+        if host.endswith('/')
+            self.address = host + 'api/v1'
+        else
+            self.address = host + '/api/v1'
+            
 		# get address for authentication
 		auth_addr = urlparse(self.address)
 		self.auth_address = str(auth_addr.scheme) +'://'+ str(auth_addr.netloc)
 
 		# Check and set up authentication
-		if self.username is not None and password is not None:
+		if self.username is not None and self.password is not None:
 			# Assume Basic authentication ritual
 			self.auth_manager = urllib2.HTTPPasswordMgrWithDefaultRealm()
 			self.auth_manager.add_password(None, self.auth_address, self.username, password)
